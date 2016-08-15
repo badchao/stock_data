@@ -72,7 +72,7 @@
 		<div class="col-sm-4">
 <%-- 			<input name="crawlScript" id="crawlScript" value="${stockIndicatorConfig.crawlScript}" placeholder="爬取脚本"  maxlength="4000"  class="form-control" /> --%>
 			<textarea name="crawlScript" id="crawlScript" rows="12" cols="79"  class="form-control" maxlength="4000">${stockIndicatorConfig.crawlScript}</textarea>
-			<span class="help-block"></span>
+			<span class="help-block">变量引用,如果是json,可引用变量名为:json,plainJson,如果是html,可以引用的变量为: doc</span>
 			<span class="error"><form:errors path="crawlScript"/></span>
 		</div>
 	 </div>
