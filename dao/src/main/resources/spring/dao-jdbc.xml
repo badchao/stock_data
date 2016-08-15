@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:lang="http://www.springframework.org/schema/lang"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+           http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd"
+	   default-autowire="byName" default-lazy-init="false">
+
+	<bean id="dwStockDao" class="com.github.stock_data.dao.impl.DwStockDaoImpl" parent="stock_dataDaoParent"/>
+	<bean id="stockDao" class="com.github.stock_data.dao.impl.StockDaoImpl" parent="stock_dataDaoParent"/>
+	<bean id="stockIndicatorConfigDao" class="com.github.stock_data.dao.impl.StockIndicatorConfigDaoImpl" parent="stock_dataDaoParent"/>
+	<bean id="stockIndicatorDao" class="com.github.stock_data.dao.impl.StockIndicatorDaoImpl" parent="stock_dataDaoParent"/>
+	<bean id="userDao" class="com.github.stock_data.dao.impl.UserDaoImpl" parent="stock_dataDaoParent"/>
+
+	<!-- 以 @Transactional 标注来定义事务 -->
+	<tx:annotation-driven transaction-manager="stock_dataTransactionManager" proxy-target-class="true"/>
+
+    <!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
+    <!-- 
+	<context:component-scan base-package="com.github.stock_data.**.dao"/>
+     -->
+
+	<!-- 用于子dao继承,以便配置不同数据源 -->
+	<bean id="stock_dataDaoParent" abstract="true">
+		<property name="dataSource" ref="stock_dataDataSource"/>
+	</bean>
+		
+	<bean id="stock_dataJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="stock_dataDataSource"/>
+    </bean>
+    
+    <!-- Transaction manager for a single JDBC DataSource -->
+    <bean id="stock_dataTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="stock_dataDataSource"/>
+    </bean>
+    
+    <!-- jdbc数据库分页方言,提供类似hibernate的数据库分页查询,其它方言:OracleDialect,SQLServerDialect,SybaseDialect,DB2Dialect,PostgreSQLDialect,MySQLDialect,DerbyDialect,HSQLDialect -->
+    <bean id="dialect" class="com.github.rapid.common.jdbc.dialect.MySQLDialect"/>
+    
+</beans>

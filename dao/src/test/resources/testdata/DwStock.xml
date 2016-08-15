@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DBUnit flatXml DataFile -->
+<dataset>
+
+
+	  <dw_stock 
+			stock_id='StockId335' 
+			tdate='2016-08-11 16:16:47.482' 
+			tdate_type='TdateType020' 
+			pe='714' 
+			pb='795' 
+			reverce='389' 
+			company_value='196' 
+	  />	
+  
+</dataset>

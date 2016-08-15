@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DBUnit flatXml DataFile -->
+<dataset>
+
+
+	  <stock_indicator 
+			stock_id='StockId427' 
+			indicator_id='IndicatorId779' 
+			tdate='2016-08-11 16:16:54.675' 
+			tdate_type='TdateType841' 
+			val='329' 
+			ext='Ext653' 
+	  />	
+  
+</dataset>

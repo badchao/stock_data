@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+
+<properties>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<entry key="user.columns">
+		<![CDATA[
+        account ,password ,name ,mobile ,email ,remarks ,enabled 
+		]]>
+	</entry>
+	
+    <entry key="user.insert" >
+    	<![CDATA[
+        INSERT INTO user (
+        	account ,
+        	password ,
+        	name ,
+        	mobile ,
+        	email ,
+        	remarks ,
+        	enabled 
+        ) VALUES (
+        	:account ,
+        	:password ,
+        	:name ,
+        	:mobile ,
+        	:email ,
+        	:remarks ,
+        	:enabled 
+        )
+    	]]>
+    </entry>
+
+    <entry key="user.update" >
+    	<![CDATA[
+        UPDATE user SET
+	        password = :password ,
+	        name = :name ,
+	        mobile = :mobile ,
+	        email = :email ,
+	        remarks = :remarks ,
+	        enabled = :enabled 
+        WHERE 
+	        account = :account 
+    	]]>
+    </entry>
+
+    <entry key="user.delete">
+    	<![CDATA[
+        DELETE FROM user WHERE
+        account = :account 
+    	]]>
+    </entry>
+    
+    <entry key="user.getById">
+		<![CDATA[
+	    SELECT <#include  "user.columns">
+	        FROM user 
+	        WHERE 
+		        account = :account 
+		]]>
+    </entry>
+
+	<entry key="user.findPage.where">
+		<![CDATA[
+	       <#if account?? >
+	            and account = :account
+	       </#if>
+	       
+	       <#if password?? >
+	            and password = :password
+	       </#if>
+	       
+	       <#if name?? >
+	            and name = :name
+	       </#if>
+	       
+	       <#if mobile?? >
+	            and mobile = :mobile
+	       </#if>
+	       
+	       <#if email?? >
+	            and email = :email
+	       </#if>
+	       
+	       <#if remarks?? >
+	            and remarks = :remarks
+	       </#if>
+	       
+	       <#if enabled?? >
+	            and enabled = :enabled
+	       </#if>
+	       
+     	]]>
+	</entry>
+	 
+    <entry key="user.findPage.count">
+    	<![CDATA[
+        SELECT count(*) 
+        FROM user 
+        WHERE 1=1
+        <#include "user.findPage.where">
+    	]]>    
+    </entry>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <entry key="user.findPage">
+		<![CDATA[
+    	SELECT 
+    		<#include "user.columns"> 
+    	FROM user 
+    	WHERE 1=1
+		<#include "user.findPage.where">
+		
+		<#if sortColumns?? >
+			ORDER BY :sortColumns
+		</#if>
+		
+		]]>
+    </entry>
+
+		
+</properties>

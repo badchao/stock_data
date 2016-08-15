@@ -1,0 +1,1 @@
+<jsp:forward page="/admin/stock/index.do"></jsp:forward>

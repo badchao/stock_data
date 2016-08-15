@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+
+<properties>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<entry key="stockIndicatorConfig.columns">
+		<![CDATA[
+        stock_id ,indicator_id ,indicator_name ,crawl_url ,crawl_script ,crawl_cron ,calc_expr ,remarks 
+		]]>
+	</entry>
+	
+    <entry key="stockIndicatorConfig.insert" >
+    	<![CDATA[
+        INSERT INTO stock_indicator_config (
+        	stock_id ,
+        	indicator_id ,
+        	indicator_name ,
+        	crawl_url ,
+        	crawl_script ,
+        	crawl_cron ,
+        	calc_expr ,
+        	remarks 
+        ) VALUES (
+        	:stockId ,
+        	:indicatorId ,
+        	:indicatorName ,
+        	:crawlUrl ,
+        	:crawlScript ,
+        	:crawlCron ,
+        	:calcExpr ,
+        	:remarks 
+        )
+    	]]>
+    </entry>
+
+    <entry key="stockIndicatorConfig.update" >
+    	<![CDATA[
+        UPDATE stock_indicator_config SET
+	        indicator_name = :indicatorName ,
+	        crawl_url = :crawlUrl ,
+	        crawl_script = :crawlScript ,
+	        crawl_cron = :crawlCron ,
+	        calc_expr = :calcExpr ,
+	        remarks = :remarks 
+        WHERE 
+	        stock_id = :stockId  AND 
+	        indicator_id = :indicatorId 
+    	]]>
+    </entry>
+
+    <entry key="stockIndicatorConfig.delete">
+    	<![CDATA[
+        DELETE FROM stock_indicator_config WHERE
+        stock_id = :stockId  AND 
+        indicator_id = :indicatorId 
+    	]]>
+    </entry>
+    
+    <entry key="stockIndicatorConfig.getById">
+		<![CDATA[
+	    SELECT <#include  "stockIndicatorConfig.columns">
+	        FROM stock_indicator_config 
+	        WHERE 
+		        stock_id = :stockId  AND 
+		        indicator_id = :indicatorId 
+		]]>
+    </entry>
+
+	<entry key="stockIndicatorConfig.findPage.where">
+		<![CDATA[
+	       <#if stockId?? >
+	            and stock_id = :stockId
+	       </#if>
+	       
+	       <#if indicatorId?? >
+	            and indicator_id = :indicatorId
+	       </#if>
+	       
+	       <#if indicatorName?? >
+	            and indicator_name = :indicatorName
+	       </#if>
+	       
+	       <#if crawlUrl?? >
+	            and crawl_url = :crawlUrl
+	       </#if>
+	       
+	       <#if crawlScript?? >
+	            and crawl_script = :crawlScript
+	       </#if>
+	       
+	       <#if crawlCron?? >
+	            and crawl_cron = :crawlCron
+	       </#if>
+	       
+	       <#if calcExpr?? >
+	            and calc_expr = :calcExpr
+	       </#if>
+	       
+	       <#if remarks?? >
+	            and remarks = :remarks
+	       </#if>
+	       
+     	]]>
+	</entry>
+	 
+    <entry key="stockIndicatorConfig.findPage.count">
+    	<![CDATA[
+        SELECT count(*) 
+        FROM stock_indicator_config 
+        WHERE 1=1
+        <#include "stockIndicatorConfig.findPage.where">
+    	]]>    
+    </entry>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <entry key="stockIndicatorConfig.findPage">
+		<![CDATA[
+    	SELECT 
+    		<#include "stockIndicatorConfig.columns"> 
+    	FROM stock_indicator_config 
+    	WHERE 1=1
+		<#include "stockIndicatorConfig.findPage.where">
+		
+		<#if sortColumns?? >
+			ORDER BY :sortColumns
+		</#if>
+		
+		]]>
+    </entry>
+
+		
+</properties>

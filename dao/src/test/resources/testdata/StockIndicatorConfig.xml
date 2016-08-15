@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DBUnit flatXml DataFile -->
+<dataset>
+
+
+	  <stock_indicator_config 
+			stock_id='StockId947' 
+			indicator_id='IndicatorId168' 
+			indicator_name='IndicatorName207' 
+			crawl_url='CrawlUrl482' 
+			crawl_script='CrawlScript273' 
+			crawl_cron='CrawlCron187' 
+			calc_expr='CalcExpr915' 
+			remarks='Remarks661' 
+	  />	
+  
+</dataset>

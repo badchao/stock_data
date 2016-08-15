@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<report id="" author="badqiu" title="公共参数" refDataSource="stock_dataDataSource" >
+	<params>
+		<!-- 最近的一天 -->
+		<param id="startDate" label="开始日期" defaultValue="${DateUtils.addDays(now,-30)?string('yyyy-MM-dd')}" dataType="date" displayType="date"></param>
+		<param id="endDate" label="结束日期" defaultValue="${DateUtils.addDays(now,-0)?string('yyyy-MM-dd')}" dataType="date" displayType="date"></param>
+		
+		<param id="stockId" label="stockId" defaultValue="1" dataType="string" displayType="text" hidden="true"></param>
+		<param id="page" label="分页页码" defaultValue="1" dataType="int" displayType="text" hidden="true"></param>
+		<param id="pageSize" label="分页大小" defaultValue="50" dataType="int" displayType="text" hidden="true"></param>
+		
+		<param id="tdateType"  defaultValue="day" dataType="string" displayType="radio" labelExpr="label" valueExpr="value" help="时间类型，取值 day:日，周:week,月:month;  hour:小时,minute:分钟,second:秒">
+			<query refDataSource="stock_dataDataSource">
+				<sql>
+				<![CDATA[
+				SELECT 'day' value,'日' label
+				UNION
+				SELECT 'week' value,'周' label
+				UNION
+				SELECT 'month' value,'月' label
+				]]>
+				</sql>
+			</query>
+		</param>
+	</params>
+</report>
+

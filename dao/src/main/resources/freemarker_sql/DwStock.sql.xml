@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+
+<properties>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<entry key="dwStock.columns">
+		<![CDATA[
+        stock_id ,tdate ,tdate_type ,pe ,pb ,reverce ,company_value 
+		]]>
+	</entry>
+	
+    <entry key="dwStock.insert" >
+    	<![CDATA[
+        INSERT INTO dw_stock (
+        	stock_id ,
+        	tdate ,
+        	tdate_type ,
+        	pe ,
+        	pb ,
+        	reverce ,
+        	company_value 
+        ) VALUES (
+        	:stockId ,
+        	:tdate ,
+        	:tdateType ,
+        	:pe ,
+        	:pb ,
+        	:reverce ,
+        	:companyValue 
+        )
+    	]]>
+    </entry>
+
+    <entry key="dwStock.update" >
+    	<![CDATA[
+        UPDATE dw_stock SET
+	        pe = :pe ,
+	        pb = :pb ,
+	        reverce = :reverce ,
+	        company_value = :companyValue 
+        WHERE 
+	        stock_id = :stockId  AND 
+	        tdate = :tdate  AND 
+	        tdate_type = :tdateType 
+    	]]>
+    </entry>
+
+    <entry key="dwStock.delete">
+    	<![CDATA[
+        DELETE FROM dw_stock WHERE
+        stock_id = :stockId  AND 
+        tdate = :tdate  AND 
+        tdate_type = :tdateType 
+    	]]>
+    </entry>
+    
+    <entry key="dwStock.getById">
+		<![CDATA[
+	    SELECT <#include  "dwStock.columns">
+	        FROM dw_stock 
+	        WHERE 
+		        stock_id = :stockId  AND 
+		        tdate = :tdate  AND 
+		        tdate_type = :tdateType 
+		]]>
+    </entry>
+
+	<entry key="dwStock.findPage.where">
+		<![CDATA[
+	       <#if stockId?? >
+	            and stock_id = :stockId
+	       </#if>
+	       
+	       
+	       <#if tdateBegin?? >
+	            and tdate >= tdateBegin
+	       </#if>
+	       <#if tdateEnd?? >
+	            and tdate <= :tdateEnd
+	       </#if>
+	       
+	       <#if tdateType?? >
+	            and tdate_type = :tdateType
+	       </#if>
+	       
+	       <#if pe?? >
+	            and pe = :pe
+	       </#if>
+	       
+	       <#if pb?? >
+	            and pb = :pb
+	       </#if>
+	       
+	       <#if reverce?? >
+	            and reverce = :reverce
+	       </#if>
+	       
+	       <#if companyValue?? >
+	            and company_value = :companyValue
+	       </#if>
+	       
+     	]]>
+	</entry>
+	 
+    <entry key="dwStock.findPage.count">
+    	<![CDATA[
+        SELECT count(*) 
+        FROM dw_stock 
+        WHERE 1=1
+        <#include "dwStock.findPage.where">
+    	]]>    
+    </entry>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <entry key="dwStock.findPage">
+		<![CDATA[
+    	SELECT 
+    		<#include "dwStock.columns"> 
+    	FROM dw_stock 
+    	WHERE 1=1
+		<#include "dwStock.findPage.where">
+		
+		<#if sortColumns?? >
+			ORDER BY :sortColumns
+		</#if>
+		
+		]]>
+    </entry>
+
+		
+</properties>

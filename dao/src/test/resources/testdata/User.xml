@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DBUnit flatXml DataFile -->
+<dataset>
+
+
+	  <user 
+			account='Account335' 
+			password='Password888' 
+			name='Name308' 
+			mobile='Mobile034' 
+			email='Email956' 
+			remarks='Remarks172' 
+			enabled='348' 
+	  />	
+  
+</dataset>

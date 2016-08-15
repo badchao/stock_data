@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DBUnit flatXml DataFile -->
+<dataset>
+
+
+	  <stock 
+			stock_id='StockId447' 
+			stock_code='StockCode810' 
+			stock_name='StockName943' 
+			market='Market383' 
+			zone='Zone286' 
+			remarks='Remarks587' 
+	  />	
+  
+</dataset>

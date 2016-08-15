@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<report id="summary" author="badqiu" title="渠道概况" refDataSource="stock_dataDataSource" >
+	<params>
+		<param ref="params/startDate"></param>
+		<param ref="params/endDate"></param>
+		<param ref="params/stockId"></param>
+		<param ref="params/tdateType"></param>
+	</params>
+	
+	<querys>
+
+		<query id="dataList" >
+			<sql><![CDATA[
+			select * from stock_indicator
+				where 
+				tdate > :startDate and tdate <=:endDate
+				-- tdate >'2016-08-01'
+				and tdate_type=:tdateType
+				and stock_id=:stockId
+			]]></sql>
+			<requerySql>
+			<![CDATA[
+				select tdate,collect_map(indicator_id,val) ext
+				from t
+				group by tdate
+			]]>
+			</requerySql>
+		</query>
+		
+	</querys>
+	
+	<charts>
+		<chart id="c1" title="活跃设备" x="tdate" xTitle="日期"
+			yTitle="数值" chartType="line" refDataList="dataList" orderBy="tdate asc" >
+			<sers>
+				<ser y="ext.borrower_idcnt" title="获得借款人"></ser>
+				<ser y="ext.credit_transfer_cnt" title="债权转让笔数"></ser>
+				<ser y="ext.interest" title="获得利息"></ser>
+			</sers>
+		</chart>
+	</charts>
+
+	<tables>
+		<table id="table" refDataList="dataList" title="数值" showSum="true">
+			<columns>
+				<column id="" value="${row.tdate!}" label="新增付费" />
+				<column id="" value="${row.ext['borrower_idcnt']!}" label="获得借款人" />
+				<column id="" value="${row.ext['credit_transfer_cnt']!}" label="债权转让笔数" />
+				<column id="" value="${row.ext['interest']!}" label="获得利息 " />
+				<column id="" label="操作" >
+					<value><![CDATA[
+					]]></value>
+				</column>
+			</columns>
+		</table>
+	</tables>
+
+</report>
