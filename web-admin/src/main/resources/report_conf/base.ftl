@@ -28,6 +28,7 @@
 			<form id="queryForm" action="${ctx}/ReportEngine/report" method="post">
 				<input id="reportPath" name="reportPath" value="${reportPath}" type="hidden"/>
 				<input id="ctx" value="${ctx}" type="hidden"/>
+				<@renderParams report.params/>
 			</form>
 		</div>
 		

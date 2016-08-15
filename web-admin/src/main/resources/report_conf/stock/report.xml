@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<report id="summary" author="badqiu" title="渠道概况" refDataSource="stock_dataDataSource" >
+<report id="summary" author="badqiu" title="股票详情" refDataSource="stock_dataDataSource" >
 	<params>
 		<param ref="params/startDate"></param>
 		<param ref="params/endDate"></param>
@@ -15,7 +15,6 @@
 			select * from stock_indicator
 				where 
 				tdate > :startDate and tdate <=:endDate
-				-- tdate >'2016-08-01'
 				and tdate_type=:tdateType
 				and stock_id=:stockId
 			]]></sql>

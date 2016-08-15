@@ -240,24 +240,11 @@
 				</select>
 				<script>
 
-				<#assign language = session.getAttribute("language") />
-				
-				<#if language == 'zh'>
-					<#assign 全选 = '全选' />
-					<#assign 已选全部 = '已选全部' />
-				<#elseif language == 'en'>
-					<#assign 全选 = 'select all' />
-					<#assign 已选全部 = 'select all' />
-				<#elseif language == 'vi'>
-					<#assign 全选 = 'Chọn hết ' />
-					<#assign 已选全部 = 'Tất cả các lựa chọn' />
-				</#if>	
-								
 				        $("#${paramDef.id}").multipleSelect({
 				            filter: true,
-				            selectAllText: "${全选}",
-				            allSelected:   "${已选全部}",
-        					countSelected: "已选 # 个",
+				            selectAllText: "select all",
+				            allSelected:   "already select all",
+        					countSelected: "select # num",
 				            onOpen: function() {
 						    	resetParentIframe();
 						    },
@@ -270,21 +257,10 @@
 				        });
 				</script>
 		<#elseif paramDef.displayType == 'date'>
-		
-				<#assign language = session.getAttribute("language") />
-				
-				<#if language == 'zh'>
-					<input class="form-control input-from-control" id="${paramDef.id}" name="${paramDef.id}" type="text" value="${paramValue}" title="${paramDef.help!}" placeholder="${paramDef.label}" onfocus="WdatePicker({isShowWeek:true})" onchange="this.form.submit();">
-				<#elseif language == 'en'>
-					<input class="form-control input-from-control" id="${paramDef.id}" name="${paramDef.id}" type="text" value="${paramValue}" title="${paramDef.help!}" placeholder="${paramDef.label}" onfocus="WdatePicker({isShowWeek:true,lang:'en'})" onchange="this.form.submit();">
-				<#elseif language == 'vi'>
-					<input class="form-control input-from-control" id="${paramDef.id}" name="${paramDef.id}" type="text" value="${paramValue}" title="${paramDef.help!}" placeholder="${paramDef.label}" onfocus="WdatePicker({isShowWeek:true,lang:'en'})" onchange="this.form.submit();">				
-				</#if>	
-				
+				<input class="form-control input-from-control" id="${paramDef.id}" name="${paramDef.id}" type="text" value="${paramValue}" title="${paramDef.help!}" placeholder="${paramDef.label}" onfocus="WdatePicker({isShowWeek:true})" onchange="this.form.submit();">
 		<#else>
 				<input class="form-control input-from-control" name="${paramDef.id}" type="${paramDef.displayType}" value="${paramValue}" title="${paramDef.help!}" placeholder="${paramDef.label}" onchange="this.form.submit();" <#if paramDef.readonly>readonly="readonly"</#if>>
 		</#if>
-		
 		
 		</div>
      </#if>		
