@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <report id="summary" author="badqiu" title="股票详情" refDataSource="stock_dataDataSource" >
+	[#assign indicatorConfigList = stock_dataJdbcTemplate.queryForList("select * from stock_indicator_config where stock_id = ?",stockId)]
+	
 	<params>
 		<param ref="params/startDate"></param>
 		<param ref="params/endDate"></param>
@@ -13,7 +15,7 @@
 		<query id="dataList" >
 			<sql><![CDATA[
 			select * from stock_indicator
-				where 
+			where 
 				tdate > :startDate and tdate <=:endDate
 				and tdate_type=:tdateType
 				and stock_id=:stockId
@@ -27,30 +29,58 @@
 			</requerySql>
 		</query>
 		
+		<query id="indicatorConfigList" >
+			<sql><![CDATA[
+			select * from stock_indicator_config
+			where 
+					stock_id=:stockId
+			]]></sql>
+		</query>
+		
 	</querys>
 	
+	<script lang="groovy">
+		<afterQuery>
+		<![CDATA[
+		import com.github.reportengine.util.MomUtil;
+		def newDataList = MomUtil.ringUp(dataList,'tdate',param.tdateType,-1);
+		context.put('dataList',newDataList);
+		System.out.println("indicatorConfigList:"+indicatorConfigList);
+		]]>
+		</afterQuery>
+	</script>
+	
 	<charts>
-		<chart id="c1" title="活跃设备" x="tdate" xTitle="日期"
+		<chart id="c1" title="所有 数据" x="tdate" xTitle="日期"
 			yTitle="数值" chartType="line" refDataList="dataList" orderBy="tdate asc" >
 			<sers>
-				<ser y="ext.borrower_idcnt" title="获得借款人"></ser>
-				<ser y="ext.credit_transfer_cnt" title="债权转让笔数"></ser>
-				<ser y="ext.interest" title="获得利息"></ser>
+				[#list indicatorConfigList as row]
+				<ser y="ext.@{row.indicator_id}" title="@{row.indicator_name}"></ser>
+				[/#list]
 			</sers>
 		</chart>
+		
+		[#list indicatorConfigList as row]
+		<chart id="@{row.indicator_id}" title="@{row.indicator_name}" x="tdate" xTitle="日期"
+			yTitle="数值" chartType="line" refDataList="dataList" orderBy="tdate asc" >
+			<sers>
+				<ser y="ext.@{row.indicator_id}" title="@{row.indicator_name}"></ser>
+			</sers>
+		</chart>
+		[/#list]
+		
 	</charts>
 
 	<tables>
-		<table id="table" refDataList="dataList" title="数值" showSum="true">
+		<table id="table" refDataList="dataList" title="数值" showSum="false">
 			<columns>
-				<column id="" value="${row.tdate!}" label="新增付费" />
-				<column id="" value="${row.ext['borrower_idcnt']!}" label="获得借款人" />
-				<column id="" value="${row.ext['credit_transfer_cnt']!}" label="债权转让笔数" />
-				<column id="" value="${row.ext['interest']!}" label="获得利息 " />
-				<column id="" label="操作" >
-					<value><![CDATA[
-					]]></value>
+				<column  value="${row.tdate!}" label="日期" />
+				[#list indicatorConfigList as row]
+				<column  value="${row.ext.@{row.indicator_id}!}" label="@{row.indicator_name}" />
+				<column  label="前一周期@{row.indicator_name}" >
+					<value><![CDATA[<#if row.pre1??>${row.pre1.ext.@{row.indicator_id}!}</#if>]]></value>
 				</column>
+				[/#list]
 			</columns>
 		</table>
 	</tables>

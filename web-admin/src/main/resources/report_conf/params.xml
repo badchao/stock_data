@@ -19,6 +19,8 @@
 				SELECT 'week' value,'周' label
 				UNION
 				SELECT 'month' value,'月' label
+				UNION
+				SELECT 'quarter' value,'季' label
 				]]>
 				</sql>
 			</query>

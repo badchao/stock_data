@@ -26,7 +26,13 @@ public class StockIndicatorCrawler {
 		Assert.hasText(config.getCrawlUrl(),"crawlUrl must be not empty");
 		Assert.hasText(config.getCrawlScript(),"crawlScript must be not empty");
 		
-		String content = readContentByURL(config.getCrawlUrl());
+		String crawlScript = config.getCrawlScript();
+		String crawlUrl = config.getCrawlUrl();
+		return evalCrawlScript(crawlUrl, crawlScript);
+	}
+
+	public Object evalCrawlScript(String crawlUrl, String crawlScript) throws MalformedURLException, IOException {
+		String content = readContentByURL(crawlUrl);
 		Map context = new HashMap();
 		context.put("$", new SelectorUtil());
 		context.put("_", new SelectorUtil());
@@ -41,7 +47,7 @@ public class StockIndicatorCrawler {
 			Document doc = Jsoup.parse(content);
 			context.put("doc", doc);
 		}
-		Object result = ScriptEngineUtil.eval("groovy", config.getCrawlScript(),context);
+		Object result = ScriptEngineUtil.eval("groovy", crawlScript,context);
 		return result;
 	}
 
