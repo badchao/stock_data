@@ -25,13 +25,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</h2>
   			</div>
   			
-  			<form class="form-horizontal" role="form" name="actionForm" action="/gc/doLogin.do" method="post" style="margin-bottom:20px;">
+  			<form class="form-horizontal" role="form" name="actionForm" action="/admin/login/login.do" method="post" style="margin-bottom:20px;">
 		  		<input type="hidden" name="redirectURL" value="${redirectURL==null ? "" : redirectURL }" >
 		  		
 				<div class="form-group">
-					<label for="passport" class="col-md-4 control-label">用户名:</label>
+					<label for="username" class="col-md-4 control-label">用户名:</label>
 					<div class="col-md-4">
-						<input  name="passport" id="passport" class="form-control" maxlength="50" placeholder="手机号码或用户名" required="true" />
+						<input  name="username" id="username" class="form-control" maxlength="50" placeholder="手机号码或用户名" required="true" />
 						<span class="help-block"></span>
 						<span class="error"><form:errors path="passport"/></span>
 					</div>

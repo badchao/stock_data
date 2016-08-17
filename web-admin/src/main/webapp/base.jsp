@@ -254,8 +254,7 @@
 					<li ><a href="${ctx}/admin/stockindicator/index.do">StockIndicator<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 					<li ><a href="${ctx}/admin/stockindicatorconfig/index.do">StockIndicatorConfig<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 					<li ><a href="${ctx}/admin/cron/index.do">Cron任务<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-					<li ><a href="${ctx}/admin/jmx/stockIndicatorCrawlJob.do">定时爬虫<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-					<li ><a href="${ctx}/admin/jmx/sqlRunnerJob.do">ETL任务<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+					<li ><a href="${ctx}/admin/login/logout.do">登出<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 					
 				</ul>
 			</div>
