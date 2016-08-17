@@ -15,7 +15,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.github.stock_data.common.web.util.SecurityUtil;
+import com.github.stock_data.common.web.util.LoginUtil;
 
 public class SecurityFilter extends OncePerRequestFilter {
 
@@ -68,7 +68,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 			return;
 		}
 		
-		if(SecurityUtil.hasLoginUser(request)) {
+		if(LoginUtil.hasLoginUser(request)) {
 			log.info("has login user,do filter");
 			chain.doFilter(request, response);
 		}else {
