@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<#include "macro.ftl"/>
+
+<sqlrunner>
+	
+	<com.github.sqlrunner.datax.config.InputsOutputs>
+		<id>stock_indicator</id>
+		<desc></desc>
+		<author>badqiu</author>
+		
+		<inputs>
+			<com.github.dataswitch.input.JdbcInput >
+				<dataSource ref="stock_dataDataSource"/>
+				<sql>
+				<![CDATA[
+				<#assign week_month =[week,month,quarter]/>
+				
+				<#list week_month as range>
+				select 
+					'${range.start}' tdate,'${range.rangeType}' tdate_type ,stock_id,indicator_id,avg(val) val 
+				from stock_indicator
+				where tdate >= '${range.start}' and tdate <='${range.end}' and tdate_type='day'
+				group by stock_id,indicator_id
+				
+				<#if range_has_next>
+				UNION ALL
+				</#if>
+				</#list>
+				]]>
+				</sql>
+			</com.github.dataswitch.input.JdbcInput>
+		</inputs>
+		<outputs>
+			<com.github.dataswitch.output.JdbcOutput >
+				<dataSource ref="stock_dataDataSource"/>
+				<sql>
+				<@genInsertOrUpdateSql 'stock_indicator' 'tdate,tdate_type,stock_id,indicator_id','val'/>
+				</sql>
+			</com.github.dataswitch.output.JdbcOutput>
+		</outputs>
+	</com.github.sqlrunner.datax.config.InputsOutputs>
+	
+</sqlrunner>
+	

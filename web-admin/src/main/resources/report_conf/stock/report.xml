@@ -25,6 +25,7 @@
 				select tdate,collect_map(indicator_id,val) ext
 				from t
 				group by tdate
+				order by tdate desc
 			]]>
 			</requerySql>
 		</query>
@@ -79,6 +80,9 @@
 				<column  value="${row.ext.@{row.indicator_id}!}" label="@{row.indicator_name}" />
 				<column  label="前一周期@{row.indicator_name}" >
 					<value><![CDATA[<#if row.pre1??>${row.pre1.ext.@{row.indicator_id}!}</#if>]]></value>
+				</column>
+				<column  label="前一周期@{row.indicator_name}(比值)" >
+					<value><![CDATA[<#if row.pre1??>${ViewUtils.showIncr(row.pre1.ext.@{row.indicator_id},row.ext.@{row.indicator_id})}</#if>]]></value>
 				</column>
 				[/#list]
 			</columns>
