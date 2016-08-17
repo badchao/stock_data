@@ -25,8 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</h2>
   			</div>
   			
-  			<form class="form-horizontal" role="form" name="actionForm" action="/admin/login/login.do" method="post" style="margin-bottom:20px;">
-		  		<input type="hidden" name="redirectURL" value="${redirectURL==null ? "" : redirectURL }" >
+  			<form class="form-horizontal"  action="/admin/login/login.do" method="get" style="margin-bottom:20px;">
 		  		
 				<div class="form-group">
 					<label for="username" class="col-md-4 control-label">用户名:</label>
@@ -48,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  			<div id="tableRow" class="row">
 	  				<div class="col-xs-12 text-center">
-	  					 <input type="submit" class="btn btn-success"  value="登&nbsp;录"/>
+	  					 <input type="submit" class="btn btn-success"  value="登 录"/>
 	  				</div>
 	  			</div>
   			
