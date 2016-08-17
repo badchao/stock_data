@@ -15,7 +15,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.github.stock_data.common.util.SecurityUtil;
+import com.github.stock_data.common.web.util.SecurityUtil;
 
 public class SecurityFilter extends OncePerRequestFilter {
 

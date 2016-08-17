@@ -1,4 +1,4 @@
-package com.github.stock_data.common.util;
+package com.github.stock_data.common.web.util;
 
 import java.io.Serializable;
 

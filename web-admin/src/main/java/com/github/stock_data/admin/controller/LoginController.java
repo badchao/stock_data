@@ -8,8 +8,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.rapid.common.web.scope.Flash;
-import com.github.stock_data.common.util.SecurityUtil;
-import com.github.stock_data.common.util.WebLoginUser;
+import com.github.stock_data.common.web.util.SecurityUtil;
+import com.github.stock_data.common.web.util.WebLoginUser;
 import com.github.stock_data.model.User;
 import com.github.stock_data.service.UserService;
 
