@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.rapid.common.web.scope.Flash;
+import com.github.stock_data.common.util.SecurityUtil;
 import com.github.stock_data.common.web.util.LoginUtil;
 import com.github.stock_data.common.web.util.WebLoginUser;
 import com.github.stock_data.model.User;
@@ -24,7 +25,7 @@ public class LoginController {
 	public String login(String username,String password,HttpServletRequest request) {
 		User user = userService.getById(username);
 		Assert.notNull(user,"not found user by username");
-		if(user.getPassword().equals(LoginUtil.getMd5Password(password))){
+		if(user.getPassword().equals(SecurityUtil.getMd5Password(password))){
 			WebLoginUser loginUser = new WebLoginUser();
 			loginUser.setUsername(user.getAccount());
 			LoginUtil.setLoginUser(request, loginUser);
