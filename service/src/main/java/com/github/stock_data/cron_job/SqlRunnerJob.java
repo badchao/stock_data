@@ -15,7 +15,8 @@ public class SqlRunnerJob {
 	public void exec() throws Exception {
 		SqlRunnerMain main = new SqlRunnerMain();
 		System.setProperty("springConfigDir", "classpath*:spring/*.xml");
-		System.setProperty("configDir", "classpath:sqlrunner/");
+//		System.setProperty("configDir", "classpath:sqlrunner");
+		System.setProperty("configDir", "/data/app/stock_data/config/sqlrunner/");
 		System.setProperty("day", DateConvertUtil.format(new Date(),"yyyy-MM-dd"));
 		System.setProperty("jobId", "stock_indicator");
 		
