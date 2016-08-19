@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,7 +49,21 @@ public class StockIndicatorCrawler {
 			context.put("doc", doc);
 		}
 		Object result = ScriptEngineUtil.eval("groovy", crawlScript,context);
+		if(isBlank(result)) {
+			throw new RuntimeException("result is blank,by crawlUrl:"+crawlUrl+" crawlScript:"+crawlScript);
+		}
 		return result;
+	}
+
+	private boolean isBlank(Object result) {
+		if(result == null) {
+			return true;
+		}
+		String str = result.toString();
+		if(StringUtils.isBlank(str)) {
+			return true;
+		}
+		return false;
 	}
 
 	private String readContentByURL(String strUrl) throws MalformedURLException, IOException {
