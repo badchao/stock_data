@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.util.Assert;
 
 import com.github.rapid.common.util.ScriptEngineUtil;
@@ -49,9 +51,23 @@ public class StockIndicatorCrawler {
 			context.put("doc", doc);
 		}
 		Object result = ScriptEngineUtil.eval("groovy", crawlScript,context);
-		if(isBlank(result)) {
+		Object finalResult = processResult(result);
+		if(isBlank(finalResult)) {
 			throw new RuntimeException("result is blank,by crawlUrl:"+crawlUrl+" crawlScript:"+crawlScript);
 		}
+		return finalResult;
+	}
+
+	private Object processResult(Object result) {
+		if(result == null) return null;
+		
+		if(result instanceof Elements) {
+			Elements elms = (Elements)result;
+			Element first = elms.first();
+			if(first == null) return null;
+			return first.text();
+		}
+		
 		return result;
 	}
 
@@ -69,9 +85,12 @@ public class StockIndicatorCrawler {
 	private String readContentByURL(String strUrl) throws MalformedURLException, IOException {
 		URL url = new URL(strUrl);
 		InputStream inputStream = url.openStream();
-		String content = IOUtils.toString(inputStream);
-		IOUtils.closeQuietly(inputStream);
-		return content;
+		try {
+			String content = IOUtils.toString(inputStream);
+			return content;
+		}finally {
+			IOUtils.closeQuietly(inputStream);
+		}
 	}
 	
 }
