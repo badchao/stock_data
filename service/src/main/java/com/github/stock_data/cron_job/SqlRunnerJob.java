@@ -11,7 +11,7 @@ import com.github.sqlrunner.datax.SqlRunnerMain;
 @Service
 public class SqlRunnerJob {
 
-	@Scheduled(cron="1 50 3,8,12 * * *")
+//	@Scheduled(cron="1 50 3,8,12 * * *")
 	public void exec() throws Exception {
 		SqlRunnerMain main = new SqlRunnerMain();
 		System.setProperty("springConfigDir", "classpath*:spring/*.xml");
@@ -21,6 +21,11 @@ public class SqlRunnerJob {
 		System.setProperty("jobId", "stock_indicator");
 		
 		main.main(new String[0]);
+		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		new SqlRunnerJob().exec();;
 	}
 	
 }
