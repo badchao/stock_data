@@ -44,6 +44,16 @@ public class StockIndicatorCrawler {
 
 	public Object evalCrawlScript(String crawlUrl, String crawlScript) throws MalformedURLException, Exception {
 		String content = readContentByURL(processUrlByFreemarker(crawlUrl));
+		Map context = buildContext(content);
+		Object result = ScriptEngineUtil.eval("groovy", crawlScript,context);
+		Object finalResult = processResult(result);
+		if(isBlank(finalResult)) {
+			throw new RuntimeException("result is blank,by crawlUrl:"+crawlUrl+" crawlScript:"+crawlScript);
+		}
+		return finalResult;
+	}
+
+	private Map buildContext(String content) {
 		Map context = new HashMap();
 		context.put("$", new SelectorUtil());
 		context.put("_", new SelectorUtil());
@@ -58,12 +68,7 @@ public class StockIndicatorCrawler {
 			Document doc = Jsoup.parse(content);
 			context.put("doc", doc);
 		}
-		Object result = ScriptEngineUtil.eval("groovy", crawlScript,context);
-		Object finalResult = processResult(result);
-		if(isBlank(finalResult)) {
-			throw new RuntimeException("result is blank,by crawlUrl:"+crawlUrl+" crawlScript:"+crawlScript);
-		}
-		return finalResult;
+		return context;
 	}
 
 	private String processUrlByFreemarker(String crawlUrl) throws Exception {
