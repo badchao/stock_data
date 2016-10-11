@@ -4,22 +4,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.Assert;
 
+import com.github.rapid.common.util.DateConvertUtil;
 import com.github.rapid.common.util.ScriptEngineUtil;
 import com.github.rapid.common.util.SelectorUtil;
+import com.github.stock_data.common.util.DateUtil;
 import com.github.stock_data.common.util.PlainMapUtil;
 import com.github.stock_data.model.StockIndicatorConfig;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
 public class StockIndicatorCrawler {
 
@@ -34,8 +42,8 @@ public class StockIndicatorCrawler {
 		return evalCrawlScript(crawlUrl, crawlScript);
 	}
 
-	public Object evalCrawlScript(String crawlUrl, String crawlScript) throws MalformedURLException, IOException {
-		String content = readContentByURL(crawlUrl);
+	public Object evalCrawlScript(String crawlUrl, String crawlScript) throws MalformedURLException, Exception {
+		String content = readContentByURL(processUrlByFreemarker(crawlUrl));
 		Map context = new HashMap();
 		context.put("$", new SelectorUtil());
 		context.put("_", new SelectorUtil());
@@ -56,6 +64,17 @@ public class StockIndicatorCrawler {
 			throw new RuntimeException("result is blank,by crawlUrl:"+crawlUrl+" crawlScript:"+crawlScript);
 		}
 		return finalResult;
+	}
+
+	private String processUrlByFreemarker(String crawlUrl) throws Exception {
+		Configuration conf = new Configuration();
+		Template tmpl = new Template("url",crawlUrl,conf);
+		Map model = new HashMap();
+		model.put("day", DateConvertUtil.format(new Date(),"yyyy-MM-dd"));
+		model.put("DateUtil", new DateUtil());
+		model.put("DateUtils", new DateUtils());
+		
+		return FreeMarkerTemplateUtils.processTemplateIntoString(tmpl, model);
 	}
 
 	private Object processResult(Object result) {
