@@ -52,7 +52,7 @@
 	<div class="form-group">
 		<label for="crawlUrl" class="col-sm-4 control-label">爬取URL:</label>
 		<div class="col-sm-4">
-			<input name="crawlUrl" id="crawlUrl" value="${stockIndicatorConfig.crawlUrl}" placeholder="爬取URL"  maxlength="300"  class="form-control" url='true' />
+			<input name="crawlUrl" id="crawlUrl" value="${stockIndicatorConfig.crawlUrl}" placeholder="爬取URL"  maxlength="300"  class="form-control" />
 			<span class="help-block"></span>
 			<span class="error"><form:errors path="crawlUrl"/></span>
 		</div>
