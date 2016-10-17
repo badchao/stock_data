@@ -24,7 +24,9 @@ public class SqlRunnerJob {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		new SqlRunnerJob().exec();;
+		new SqlRunnerJob().exec();
+		
+		System.exit(0);
 	}
 	
 }
