@@ -62,6 +62,12 @@ public class StockIndicator  implements java.io.Serializable{
 	
 	private java.lang.Float val;
 	
+	private java.lang.Float sumVal;
+	private java.lang.Float avgVal;
+	private java.lang.Float preVal;
+	private java.lang.Float preSumVal;
+	private java.lang.Float preAvgVal;
+	
     /**
      * 扩展字段       db_column: ext 
      */ 	
@@ -163,6 +169,22 @@ public class StockIndicator  implements java.io.Serializable{
 		this.val = val;
 	}
 	
+	public java.lang.Float getSumVal() {
+		return sumVal;
+	}
+
+	public void setSumVal(java.lang.Float sumVal) {
+		this.sumVal = sumVal;
+	}
+
+	public java.lang.Float getAvgVal() {
+		return avgVal;
+	}
+
+	public void setAvgVal(java.lang.Float avgVal) {
+		this.avgVal = avgVal;
+	}
+
 	public java.lang.Float val() {
 		return this.val;
 	}

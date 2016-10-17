@@ -55,36 +55,20 @@
     <!-- ViewResolver -->
  	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
  	
-	<bean class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
-		<constructor-arg>
-			<!-- jsp ViewResolver -->
-		    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		        <property name="prefix" value="/pages"/>
-		        <property name="suffix" value=".jsp"/>
-		    </bean>
-		</constructor-arg>
-		<property name="mobileSuffix" value=".mobile"/>
-		<property name="tabletSuffix" value=".tablet"/>
-		<property name="enableFallback" value="true" />
-		<property name="order" value="99999"/>
-	</bean>
-	
-	<bean class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
-		<constructor-arg>
-		    <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		        <property name="exposeSpringMacroHelpers" value="true"/>
-		    	<property name="contentType" value="text/html; charset=utf-8"/>
-		        <property name="cache" value="false" />
-		        <property name="prefix" value=""/>
-		        <property name="suffix" value=".ftl" />
-		        <property name="order" value="0"/>
-   			</bean>
-		</constructor-arg>
-		<property name="mobileSuffix" value=".mobile"/>
-		<property name="tabletSuffix" value=".tablet"/>
-		<property name="enableFallback" value="true" />
-		<property name="order" value="0"/>
+	<!-- jsp ViewResolver -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/pages"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="exposeSpringMacroHelpers" value="true"/>
+    	<property name="contentType" value="text/html; charset=utf-8"/>
+        <property name="cache" value="false" />
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl" />
+        <property name="order" value="0"/>
 	</bean>
 
 	<!-- 配置freeMarker的模板路径 -->

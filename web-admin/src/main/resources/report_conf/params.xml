@@ -3,7 +3,7 @@
 <report id="" author="badqiu" title="公共参数" refDataSource="stock_dataDataSource" >
 	<params>
 		<!-- 最近的一天 -->
-		<param id="startDate" label="开始日期" defaultValue="${DateUtils.addDays(now,-100)?string('yyyy-MM-dd')}" dataType="date" displayType="date"></param>
+		<param id="startDate" label="开始日期" defaultValue="${DateUtils.addDays(now,-150)?string('yyyy-MM-dd')}" dataType="date" displayType="date"></param>
 		<param id="endDate" label="结束日期" defaultValue="${DateUtils.addDays(now,-0)?string('yyyy-MM-dd')}" dataType="date" displayType="date"></param>
 		
 		<param id="stockId" label="stockId" defaultValue="1" dataType="string" displayType="text" hidden="true"></param>

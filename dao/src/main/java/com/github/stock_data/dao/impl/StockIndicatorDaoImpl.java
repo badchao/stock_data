@@ -48,7 +48,7 @@ public class StockIndicatorDaoImpl extends BaseSpringJdbcDao implements StockInd
 	
 	private RowMapper<StockIndicator> entityRowMapper = new BeanPropertyRowMapper<StockIndicator>(getEntityClass());
 	
-	static final private String COLUMNS = "stock_id,indicator_id,tdate,tdate_type,val,ext,update_time";
+	static final private String COLUMNS = "stock_id,indicator_id,tdate,tdate_type,val,sum_val,avg_val,ext,update_time";
 	static final private String SELECT_FROM = "select " + COLUMNS + " from stock_indicator";
 	
 	@Override
@@ -67,9 +67,9 @@ public class StockIndicatorDaoImpl extends BaseSpringJdbcDao implements StockInd
 	
 	public void insert(StockIndicator entity) {
 		String sql = "insert into stock_indicator " 
-			 + " (stock_id,indicator_id,tdate,tdate_type,val,ext,update_time) " 
+			 + " (stock_id,indicator_id,tdate,tdate_type,val,sum_val,avg_val,ext,update_time) " 
 			 + " values "
-			 + " (:stockId,:indicatorId,:tdate,:tdateType,:val,:ext,:updateTime)";
+			 + " (:stockId,:indicatorId,:tdate,:tdateType,:val,:sumVal,:avgVal,:ext,:updateTime)";
 //		insertWithGeneratedKey(entity,sql); //for sqlserver:identity and mysql:auto_increment
 		
 		//其它主键生成策略
@@ -81,7 +81,7 @@ public class StockIndicatorDaoImpl extends BaseSpringJdbcDao implements StockInd
 	
 	public int update(StockIndicator entity) {
 		String sql = "update stock_indicator set "
-					+ " val=:val,ext=:ext,update_time=:updateTime"
+					+ " val=:val,sum_val=:sumVal,avg_val=:avgVal,ext=:ext,update_time=:updateTime"
 					+ " where  stock_id = :stockId and indicator_id = :indicatorId and tdate = :tdate and tdate_type = :tdateType ";
 		return getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(entity));
 	}
