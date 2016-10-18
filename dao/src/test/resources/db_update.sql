@@ -5,5 +5,8 @@ ADD COLUMN `min_val`  float NULL AFTER `avg_val`,
 ADD COLUMN `max_val`  float NULL AFTER `avg_val`,
 ADD COLUMN `pre_val`  float NULL AFTER `sum_val`,
 ADD COLUMN `pre_avg_val`  float NULL AFTER `pre_val`,
-ADD COLUMN `pre_sum_val`  float NULL AFTER `pre_avg_val`;
+ADD COLUMN `pre_sum_val`  float NULL AFTER `pre_avg_val`,
+ADD COLUMN `pre_min_val`  float NULL AFTER `pre_val`,
+ADD COLUMN `pre_max_val`  float NULL AFTER `pre_avg_val`
+;
 
