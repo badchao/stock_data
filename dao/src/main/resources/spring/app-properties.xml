@@ -28,6 +28,8 @@
 				<value>file:/etc/stock_data/app.properties</value>
 				<value>file:/data/app/stock_data/config/${APP_MODE:dev}/app.properties</value> 
 				<value>file:/${user.home}/stock_data/app.properties</value> 
+				
+				<value>classpath*:report_engine.properties</value>
 			</list>
 		</property>
     </bean>
