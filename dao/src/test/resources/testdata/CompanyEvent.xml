@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DBUnit flatXml DataFile -->
+<dataset>
+
+
+	  <company_event 
+			id='129' 
+			tdate='2016-11-07 18:13:55.345' 
+			company_name='CompanyName340' 
+			stock_event='StockEvent842' 
+			relate_company='RelateCompany529' 
+			remarks='Remarks791' 
+			attention_date='2016-11-07 18:13:55.345' 
+			relate_stock='RelateStock919' 
+	  />	
+  
+</dataset>

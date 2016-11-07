@@ -21,6 +21,7 @@
 	<bean id="stockIndicatorConfigDao" class="com.github.stock_data.dao.impl.StockIndicatorConfigDaoImpl" parent="stock_dataDaoParent"/>
 	<bean id="stockIndicatorDao" class="com.github.stock_data.dao.impl.StockIndicatorDaoImpl" parent="stock_dataDaoParent"/>
 	<bean id="userDao" class="com.github.stock_data.dao.impl.UserDaoImpl" parent="stock_dataDaoParent"/>
+	<bean id="companyEventDao" class="com.github.stock_data.dao.impl.CompanyEventDaoImpl" parent="stock_dataDaoParent"/>
 
 	<!-- 以 @Transactional 标注来定义事务 -->
 	<tx:annotation-driven transaction-manager="stock_dataTransactionManager" proxy-target-class="true"/>

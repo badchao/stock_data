@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+
+<properties>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<entry key="companyEvent.columns">
+		<![CDATA[
+        id ,tdate ,company_name ,stock_event ,relate_company ,remarks ,attention_date ,relate_stock 
+		]]>
+	</entry>
+	
+    <entry key="companyEvent.insert" >
+    	<![CDATA[
+        INSERT INTO company_event (
+        	id ,
+        	tdate ,
+        	company_name ,
+        	stock_event ,
+        	relate_company ,
+        	remarks ,
+        	attention_date ,
+        	relate_stock 
+        ) VALUES (
+        	:id ,
+        	:tdate ,
+        	:companyName ,
+        	:stockEvent ,
+        	:relateCompany ,
+        	:remarks ,
+        	:attentionDate ,
+        	:relateStock 
+        )
+    	]]>
+    </entry>
+
+    <entry key="companyEvent.update" >
+    	<![CDATA[
+        UPDATE company_event SET
+	        tdate = :tdate ,
+	        company_name = :companyName ,
+	        stock_event = :stockEvent ,
+	        relate_company = :relateCompany ,
+	        remarks = :remarks ,
+	        attention_date = :attentionDate ,
+	        relate_stock = :relateStock 
+        WHERE 
+	        id = :id 
+    	]]>
+    </entry>
+
+    <entry key="companyEvent.delete">
+    	<![CDATA[
+        DELETE FROM company_event WHERE
+        id = :id 
+    	]]>
+    </entry>
+    
+    <entry key="companyEvent.getById">
+		<![CDATA[
+	    SELECT <#include  "companyEvent.columns">
+	        FROM company_event 
+	        WHERE 
+		        id = :id 
+		]]>
+    </entry>
+
+	<entry key="companyEvent.findPage.where">
+		<![CDATA[
+	       <#if id?? >
+	            and id = :id
+	       </#if>
+	       
+	       
+	       <#if tdateBegin?? >
+	            and tdate >= tdateBegin
+	       </#if>
+	       <#if tdateEnd?? >
+	            and tdate <= :tdateEnd
+	       </#if>
+	       
+	       <#if companyName?? >
+	            and company_name = :companyName
+	       </#if>
+	       
+	       <#if stockEvent?? >
+	            and stock_event = :stockEvent
+	       </#if>
+	       
+	       <#if relateCompany?? >
+	            and relate_company = :relateCompany
+	       </#if>
+	       
+	       <#if remarks?? >
+	            and remarks = :remarks
+	       </#if>
+	       
+	       
+	       <#if attentionDateBegin?? >
+	            and attention_date >= attentionDateBegin
+	       </#if>
+	       <#if attentionDateEnd?? >
+	            and attention_date <= :attentionDateEnd
+	       </#if>
+	       
+	       <#if relateStock?? >
+	            and relate_stock = :relateStock
+	       </#if>
+	       
+     	]]>
+	</entry>
+	 
+    <entry key="companyEvent.findPage.count">
+    	<![CDATA[
+        SELECT count(*) 
+        FROM company_event 
+        WHERE 1=1
+        <#include "companyEvent.findPage.where">
+    	]]>    
+    </entry>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <entry key="companyEvent.findPage">
+		<![CDATA[
+    	SELECT 
+    		<#include "companyEvent.columns"> 
+    	FROM company_event 
+    	WHERE 1=1
+		<#include "companyEvent.findPage.where">
+		
+		<#if sortColumns?? >
+			ORDER BY :sortColumns
+		</#if>
+		
+		]]>
+    </entry>
+
+		
+</properties>
