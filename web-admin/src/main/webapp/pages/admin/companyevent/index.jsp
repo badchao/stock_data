@@ -132,7 +132,7 @@
 				<td><c:out value='${row.relateStock}'/>&nbsp;</td>
 				<td><c:out value='${row.remarks}'/>&nbsp;</td>
 				<td><fmt:formatDate value='${row.attentionDate}' pattern='yyyy-MM-dd'/>&nbsp;</td>
-				<td>${row.attentionDays}</td>
+				<td><span class="${row.attentionDays < 30 && row.attentionDays > 0 ? 'label label-danger' : '' }">${row.attentionDays}</span></td>
 				
 				<td>
 					<a class="btn btn-primary btn-xs" href="${ctx}/admin/companyevent/show.do?id=${row.id}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 查看</a>&nbsp;&nbsp;
