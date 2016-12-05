@@ -7,13 +7,15 @@
 package com.github.stock_data.model;
 
 import javax.validation.constraints.*;
-import java.util.*;
-import org.hibernate.validator.constraints.*;
 
+import java.util.*;
+
+import org.hibernate.validator.constraints.*;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.CompareToBuilder;
 
 
 
@@ -24,7 +26,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @version 1.0
  * @since 1.0
  */
-public class CompanyEvent  implements java.io.Serializable{
+public class CompanyEvent  implements java.io.Serializable,Comparable<CompanyEvent>{
 	private static final long serialVersionUID = 5454155825314635342L;
 	
 	//date formats
@@ -228,6 +230,13 @@ public class CompanyEvent  implements java.io.Serializable{
 		return this;
 	}
 	
+	public long getAttentionDays() {
+		if(attentionDate == null) return 0;
+		
+		long intervalMills = attentionDate.getTime() - new Date().getTime();
+		return intervalMills/(3600 * 1000 * 24);
+	}
+	
 
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
@@ -247,5 +256,11 @@ public class CompanyEvent  implements java.io.Serializable{
 			.append(getId(),other.getId())
 			.isEquals();
 	}
+
+	@Override
+	public int compareTo(CompanyEvent o) {
+		return new Long(getAttentionDays()).compareTo(o.getAttentionDays());
+	}
+	
 }
 

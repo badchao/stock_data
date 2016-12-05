@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -99,9 +100,11 @@ public class CompanyEventController {
 	@RequestMapping
 	public String index(ModelMap model,CompanyEventQuery query,HttpServletRequest request) {
 		query = ServletUtil.tryGetFromSession(request,query);
-		Assert.isTrue(query.getPageSize() <= 200,"query.pageSize too large");
+		query.setPageSize(1000);
+//		Assert.isTrue(query.getPageSize() <= 200,"query.pageSize too large");
 		
 		Page<CompanyEvent> page = this.companyEventService.findPage(query);
+		Collections.sort(page.getItemList());
 		
 		model.addAttribute("page",page);
 		model.addAttribute("query",query);

@@ -106,16 +106,16 @@
 		<table class="table table-hover scrolltable sortable">
 		  <thead>
 			  <tr>
-				<th style="width:1px;"> </th>
 				<!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; -->
-				<th sortColumn="id" >id</th>
+<!-- 				<th sortColumn="id" >id</th> -->
 				<th sortColumn="tdate" >日期</th>
 				<th sortColumn="company_name" >公司</th>
 				<th sortColumn="stock_event" >事件内容</th>
 				<th sortColumn="relate_company" >关联公司</th>
+				<th sortColumn="relate_stock" >关联股票</th>
 				<th sortColumn="remarks" >备注</th>
 				<th sortColumn="attention_date" >重新关注日期</th>
-				<th sortColumn="relate_stock" >关联股票</th>
+				<th sortColumn="attention_days" >重新关注天数</th>
 				<th>操作</th>
 			  </tr>
 		  </thead>
@@ -123,16 +123,16 @@
 		  	  <c:forEach items="${page.itemList}" var="row" varStatus="status">
 		  	  
 			  <tr>
-				<td>${page.paginator.startRow + status.index}</td>
 				
-				<td><c:out value='${row.id}'/>&nbsp;</td>
+<%-- 				<td><c:out value='${row.id}'/>&nbsp;</td> --%>
 				<td><fmt:formatDate value='${row.tdate}' pattern='yyyy-MM-dd'/>&nbsp;</td>
 				<td><c:out value='${row.companyName}'/>&nbsp;</td>
 				<td><c:out value='${row.stockEvent}'/>&nbsp;</td>
 				<td><c:out value='${row.relateCompany}'/>&nbsp;</td>
+				<td><c:out value='${row.relateStock}'/>&nbsp;</td>
 				<td><c:out value='${row.remarks}'/>&nbsp;</td>
 				<td><fmt:formatDate value='${row.attentionDate}' pattern='yyyy-MM-dd'/>&nbsp;</td>
-				<td><c:out value='${row.relateStock}'/>&nbsp;</td>
+				<td>${row.attentionDays}</td>
 				
 				<td>
 					<a class="btn btn-primary btn-xs" href="${ctx}/admin/companyevent/show.do?id=${row.id}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 查看</a>&nbsp;&nbsp;
