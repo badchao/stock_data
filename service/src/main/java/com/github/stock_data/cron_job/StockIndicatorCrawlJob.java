@@ -31,7 +31,7 @@ public class StockIndicatorCrawlJob {
 		this.stockIndicatorService = stockIndicatorService;
 	}
 
-	@Scheduled(cron="1 1 3,8,12,19,22 * * *")
+	@Scheduled(cron="1 1 3,8,10,12,15,19,22 * * *")
 	public void exec() {
 		StockIndicatorConfigQuery query = new StockIndicatorConfigQuery();
 		query.setPageSize(1000);
