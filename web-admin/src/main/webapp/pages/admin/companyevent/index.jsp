@@ -116,6 +116,7 @@
 				<th sortColumn="remarks" >备注</th>
 				<th sortColumn="attention_date" >重新关注日期</th>
 				<th sortColumn="attention_days" >重新关注天数</th>
+				<th sortColumn="tdateIntervalDays" >己发生天数</th>
 				<th>操作</th>
 			  </tr>
 		  </thead>
@@ -133,6 +134,7 @@
 				<td><c:out value='${row.remarks}'/>&nbsp;</td>
 				<td><fmt:formatDate value='${row.attentionDate}' pattern='yyyy-MM-dd'/>&nbsp;</td>
 				<td><span class="${row.attentionDays < 30 && row.attentionDays > 0 ? 'label label-danger' : '' }">${row.attentionDays}</span></td>
+				<td><span class="${row.tdateIntervalDays > 150 && row.tdateIntervalDays > 0 ? 'label label-danger' : '' }">${row.tdateIntervalDays}</span></td>
 				
 				<td>
 					<a class="btn btn-primary btn-xs" href="${ctx}/admin/companyevent/show.do?id=${row.id}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 查看</a>&nbsp;&nbsp;

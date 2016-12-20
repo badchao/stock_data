@@ -127,6 +127,13 @@ public class CompanyEvent  implements java.io.Serializable,Comparable<CompanyEve
 		this.tdate = tdate;
 		return this;
 	}
+
+	public long getTdateIntervalDays() {
+		if(tdate == null) return 0;
+		
+		long intervalMills = new Date().getTime() - tdate.getTime();
+		return intervalMills/(3600 * 1000 * 24);
+	}
 	
 	public String getCompanyName() {
 		return this.companyName;
@@ -212,6 +219,13 @@ public class CompanyEvent  implements java.io.Serializable,Comparable<CompanyEve
 		this.attentionDate = attentionDate;
 		return this;
 	}
+
+	public long getAttentionDays() {
+		if(attentionDate == null) return 0;
+		
+		long intervalMills = attentionDate.getTime() - new Date().getTime();
+		return intervalMills/(3600 * 1000 * 24);
+	}
 	
 	public String getRelateStock() {
 		return this.relateStock;
@@ -229,14 +243,6 @@ public class CompanyEvent  implements java.io.Serializable,Comparable<CompanyEve
 		this.relateStock = relateStock;
 		return this;
 	}
-	
-	public long getAttentionDays() {
-		if(attentionDate == null) return 0;
-		
-		long intervalMills = attentionDate.getTime() - new Date().getTime();
-		return intervalMills/(3600 * 1000 * 24);
-	}
-	
 
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
