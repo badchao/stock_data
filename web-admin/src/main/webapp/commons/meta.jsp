@@ -1,28 +1,60 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta http-equiv="Cache-Control" content="no-store"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
+	<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<!-- optional javascript: effects.js,jquery.js -->
-	<link href="<c:url value="/styles/global.css"/>" type="text/css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="Cache-Control" content="no-store"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- rapid-validation BEGIN-->
-	<link href="<c:url value="/js/rapid-validation/validation.css"/>" type="text/css" rel="stylesheet">
-	<script src="<c:url value="/js/rapid-validation/prototype_for_validation.js"/>" type="text/javascript"></script>
+	<!-- jquery -->
+	<script src="${ctx}/js/jquery.min.js"></script>
+	<script src="${ctx}/js/jquery.cookie.js"></script>
+	<!-- date format -->
+	<script src="${ctx}/js/moment.min.js" type="text/javascript"></script>
+	<!-- util -->
+	<script src="${ctx}/js/underscore.js" type="text/javascript"></script>
+		
+	<!-- simpletable -->
+	<link href="${ctx}/widgets/simpletable/simpletable.css" type="text/css" rel="stylesheet">
+	<script  src="${ctx}/widgets/simpletable/simpletable.js" type="text/javascript"></script>
 	
-	<!-- 
-	<script src="<c:url value="/js/rapid-validation/effects.js"/>" type="text/javascript"></script>
-	-->
-	
-	<!-- show validation error as tooptips -->
-	<script src="<c:url value="/js/rapid-validation/tooltips.js"/>" type="text/javascript"></script>
-	<link href="<c:url value="/js/rapid-validation/tooltips.css"/>" type="text/css" rel="stylesheet">
-	
-	<script src="<c:url value="/js/rapid-validation/validation_cn.js"/>" type="text/javascript"></script>
-<!-- rapid-validation END-->
+	<!-- bootstrap -->
+	<link href="${ctx}/css/bootstrap-cerulean.min.css" rel="stylesheet"  media="screen"/>
+	<script src="${ctx}/js/bootstrap.min.js"></script>
 
-<script src="<c:url value="/js/application.js"/>" type="text/javascript"></script>
-<script src="<c:url value="/js/jquery.js"/>" type="text/javascript"></script>
-
-<script src="<c:url value="/js/My97DatePicker/WdatePicker.js"/>" type="text/javascript"></script>
+	<!-- bootstrap switch -->
+	<script src="${ctx}/js/bootstrap-switch.min.js"></script>
+	<link href="${ctx}/css/bootstrap-switch.min.css" type="text/css" rel="stylesheet"/>
+		
+	<!-- multiple-select -->
+	<script src="${ctx}/js/multiple-select/jquery.multiple.select.js"></script>
+	<link href="${ctx}/js/multiple-select/multiple-select.css" rel="stylesheet"  media="screen"/>
+	
+	<!-- select2 -->
+	<link href="${ctx}/js/select2/select2.min.css" rel="stylesheet" />
+	<link href="${ctx}/js/select2/select2-bootstrap.css" rel="stylesheet" />
+	<script src="${ctx}/js/select2/select2.min.js"></script>
+	
+	<!-- menu -->
+	<script src="${ctx}/js/metisMenu/metisMenu.js"></script>
+	<link href="${ctx}/js/metisMenu/metisMenu.css" rel="stylesheet"  media="screen"/>
+	
+	<!-- fileinput -->
+	<script src="${ctx}/js/fileinput.js"></script>
+	<script src="${ctx}/js/fileinput_locale_zh.js"></script>
+	<link href="${ctx}/css/fileinput.css" rel="stylesheet"  media="screen"/>
+	
+	<!-- jquery.validate doc: http://jqueryvalidation.org/ -->
+	<script src="${ctx}/js/jquery.validate/jquery.validate.js"></script>
+	<script src="${ctx}/js/jquery.validate/additional-methods.js"></script>
+	<script src="${ctx}/js/jquery.validate/localization/messages_zh.js"></script>
+	
+	<!-- date control -->
+	<script src="${ctx}/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+	
+	<!-- app -->
+	<script src="${ctx}/js/app.js" ></script>
+	
+	<link href="${ctx}/css/global.css" type="text/css" rel="stylesheet">
+	

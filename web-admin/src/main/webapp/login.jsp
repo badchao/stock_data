@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</h2>
   			</div>
   			
-  			<form class="form-horizontal"  action="/admin/login/login.do" method="get" style="margin-bottom:20px;">
+  			<form class="form-horizontal" id="loginForm"  action="/admin/login/login.do" method="get" style="margin-bottom:20px;" onsubmit="onLoginSubmit()">
 		  		
 				<div class="form-group">
 					<label for="username" class="col-md-4 control-label">用户名:</label>
@@ -60,7 +60,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 <script>
-	new Validation(document.forms[0],{onSubmit:true});
+	function onLoginSubmit(){
+		localStorage.setItem('username',$('#username').val());
+		localStorage.setItem('password',$('#password').val());
+	}
+	
+	function doAutoLogin(){
+		$('#username').val(localStorage.getItem('username'));
+		$('#password').val(localStorage.getItem('password'));
+		//$('#loginForm').submit();
+	}
+	doAutoLogin();
+	
 </script>
 
 </body>
