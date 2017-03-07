@@ -3,6 +3,7 @@
 
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- jquery -->
 	<script src="${ctx}/js/jquery.min.js"></script>
 	<script src="${ctx}/js/jquery.cookie.js"></script>
@@ -19,8 +20,8 @@
 	<script src="${ctx}/js/multiple-select/jquery.multiple.select.js"></script>
 	<link href="${ctx}/js/multiple-select/multiple-select.css" rel="stylesheet"  media="screen"/>
 	
-	<script src="${ctx}/js/metisMenu/metisMenu.js"></script>
-	<link href="${ctx}/js/metisMenu/metisMenu.css" rel="stylesheet"  media="screen"/>
+<%-- 	<script src="${ctx}/js/metisMenu/metisMenu.js"></script> --%>
+<%-- 	<link href="${ctx}/js/metisMenu/metisMenu.css" rel="stylesheet"  media="screen"/> --%>
 	
 	<!-- fileinput -->
 	<script src="${ctx}/js/fileinput.js"></script>
@@ -241,7 +242,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Brand</a>
+				<a class="navbar-brand" href="#">股票云</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
