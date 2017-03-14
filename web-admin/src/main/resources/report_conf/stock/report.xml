@@ -79,10 +79,10 @@
 				[#list indicatorConfigList as row]
 				<column  value="${row.ext.@{row.indicator_id}!}" label="@{row.indicator_name}" />
 				<column  label="前一周期@{row.indicator_name}" >
-					<value><![CDATA[<#if row.pre1??>${row.pre1.ext.@{row.indicator_id}!} </#if>]]></value>
+					<value><![CDATA[<#if row.pre1?? && row.pre1.ext??>${row.pre1.ext.@{row.indicator_id}!} </#if>]]></value>
 				</column>
 				<column  label="前一周期@{row.indicator_name}差额" >
-					<value><![CDATA[<#if row.pre1??>${row.ext.@{row.indicator_id} - row.pre1.ext.@{row.indicator_id}}</#if>]]></value>
+					<value><![CDATA[<#if row.pre1?? && row.pre1.ext??>${row.ext.@{row.indicator_id} - row.pre1.ext.@{row.indicator_id}}</#if>]]></value>
 				</column>
 				[/#list]
 			</columns>
