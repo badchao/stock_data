@@ -13,13 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.github.stock_data.service.StockIndicatorService;
-
 import com.github.rapid.common.util.holder.BeanValidatorHolder;
 import com.github.rapid.common.util.page.Page;
-
 import com.github.stock_data.model.*;
 import com.github.stock_data.dao.*;
 import com.github.stock_data.query.*;
+
 import java.util.Date;
 
 /**
@@ -125,4 +124,9 @@ public class StockIndicatorServiceImpl implements StockIndicatorService {
         	//复杂的属性的检查一般需要分开写几个方法，如 checkProperty1(v),checkProperty2(v)
         }
     }
+
+	@Override
+	public void deleteBy(String stockId, String indicatorId) {
+		stockIndicatorDao.deleteBy(stockId, indicatorId);
+	}
 }

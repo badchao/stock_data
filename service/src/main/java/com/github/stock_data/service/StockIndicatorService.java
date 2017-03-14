@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import com.github.stock_data.model.*;
 import com.github.stock_data.dao.*;
 import com.github.stock_data.query.*;
+
 import java.util.Date;
 
 /**
@@ -55,6 +56,8 @@ public interface StockIndicatorService {
 	 * 分页查询: StockIndicator
 	 **/      
 	public Page<StockIndicator> findPage(StockIndicatorQuery query);
+
+	public void deleteBy(String stockId, String indicatorId);
 	
     
 }

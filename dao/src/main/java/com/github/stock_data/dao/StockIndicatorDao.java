@@ -28,9 +28,12 @@ public interface StockIndicatorDao {
 
 	public int deleteById(String stockId, String indicatorId, Date tdate, String tdateType);
 	
+	public void deleteBy(String stockId, String indicatorId);
+	
 	public StockIndicator getById(String stockId, String indicatorId, Date tdate, String tdateType);
 	
 
-	public Page<StockIndicator> findPage(StockIndicatorQuery query);	
+	public Page<StockIndicator> findPage(StockIndicatorQuery query);
+
 	
 }

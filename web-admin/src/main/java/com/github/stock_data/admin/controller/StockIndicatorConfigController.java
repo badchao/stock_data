@@ -162,15 +162,16 @@ public class StockIndicatorConfigController {
 			return  "/admin/stockindicatorconfig/edit";
 		}
 		Flash.current().success(UPDATE_SUCCESS);
-		return LIST_ACTION+"?stockId="+stockIndicatorConfig.getStockId();
+		return LIST_ACTION+"&stockId="+stockIndicatorConfig.getStockId();
 	}
 	
 	/** 删除 */
 	@RequestMapping
 	public String delete(ModelMap model,String stockId, String indicatorId) {
 		stockIndicatorConfigService.removeById(stockId,indicatorId);
+		
 		Flash.current().success(DELETE_SUCCESS);
-		return LIST_ACTION+"?stockId="+stockId;
+		return LIST_ACTION+"&stockId="+stockId;
 	}
 	
 	

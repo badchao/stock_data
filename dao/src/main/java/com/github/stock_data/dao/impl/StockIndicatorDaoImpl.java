@@ -8,8 +8,8 @@ package com.github.stock_data.dao.impl;
 
 import com.github.stock_data.model.*;
 import com.github.stock_data.query.*;
-
 import com.github.stock_data.dao.StockIndicatorDao;
+
 
 
 
@@ -19,7 +19,6 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.RowMapper;
@@ -90,7 +89,13 @@ public class StockIndicatorDaoImpl extends BaseSpringJdbcDao implements StockInd
 		String sql = "delete from stock_indicator where  stock_id = ? and indicator_id = ? and tdate = ? and tdate_type = ? ";
 		return  getJdbcTemplate().update(sql,  stockId,indicatorId,tdate,tdateType);
 	}
-
+	
+	@Override
+	public void deleteBy(String stockId, String indicatorId) {
+		String sql = "delete from stock_indicator where  stock_id = ? and indicator_id = ?  ";
+		getJdbcTemplate().update(sql,  stockId,indicatorId);
+	}
+	
 	public StockIndicator getById(String stockId, String indicatorId, Date tdate, String tdateType) {
 		String sql = SELECT_FROM + " where  stock_id = ? and indicator_id = ? and tdate = ? and tdate_type = ? ";
 		return (StockIndicator)DataAccessUtils.singleResult(getJdbcTemplate().query(sql, getEntityRowMapper(),stockId,indicatorId,tdate,tdateType));
@@ -126,4 +131,6 @@ public class StockIndicatorDaoImpl extends BaseSpringJdbcDao implements StockInd
 		
 		return pageQuery(sql.toString(),query,getEntityRowMapper());				
 	}
+
+
 }
