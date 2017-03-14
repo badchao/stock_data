@@ -71,6 +71,7 @@ public class StockIndicatorConfigController {
 	private static Logger logger = LoggerFactory.getLogger(StockIndicatorConfigController.class);
 	
 	private StockIndicatorConfigService stockIndicatorConfigService;
+	private StockIndicatorService stockIndicatorService;
 	
 	private final String LIST_ACTION = "redirect:/admin/stockindicatorconfig/index.do?useSessionParam=true";
 	
@@ -169,7 +170,7 @@ public class StockIndicatorConfigController {
 	@RequestMapping
 	public String delete(ModelMap model,String stockId, String indicatorId) {
 		stockIndicatorConfigService.removeById(stockId,indicatorId);
-		
+		stockIndicatorService.deleteBy(stockId,indicatorId);
 		Flash.current().success(DELETE_SUCCESS);
 		return LIST_ACTION+"&stockId="+stockId;
 	}
