@@ -20,7 +20,7 @@
 	<script  src="${ctx}/widgets/simpletable/simpletable.js" type="text/javascript"></script>
 	
 	<!-- bootstrap -->
-	<link href="${ctx}/css/bootstrap-cerulean.min.css" rel="stylesheet"  media="screen"/>
+	<link href="${ctx}/css/bootstrap.min.css" rel="stylesheet"  media="screen"/>
 	<script src="${ctx}/js/bootstrap.min.js"></script>
 
 	<!-- bootstrap switch -->

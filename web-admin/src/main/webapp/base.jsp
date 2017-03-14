@@ -257,7 +257,6 @@
 					<li ><a href="${ctx}/admin/companyevent/index.do">CompanyEvent<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 					<li ><a href="${ctx}/admin/cron/index.do">Cron任务<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 					<li ><a href="${ctx}/admin/login/logout.do">登出<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-					
 				</ul>
 			</div>
 		</div>
