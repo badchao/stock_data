@@ -29,73 +29,71 @@
 		<div class="panel-heading">CompanyEvent 列表</div>
 		<div class="panel-body">
 			
-			<div class="row">
-				<div class="col-sm-3">
+			<div class="row visible-lg" id="query-content" >
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="tdateBegin" class="control-label">开始日期</label>
 						<input name="tdateBegin" id="tdateBegin" value="<fmt:formatDate value='${query.tdateBegin}' pattern='yyyy-MM-dd'/>"  placeholder="开始时间"   class="form-control input-from-control"   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"   />
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="tdateEnd" class="control-label">结束日期</label>
 						<input name="tdateEnd" id="tdateEnd" value="<fmt:formatDate value='${query.tdateEnd}' pattern='yyyy-MM-dd'/>" placeholder="结束时间" class="form-control input-from-control"   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    />
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="companyName" class="control-label">公司</label>
 						<input name="companyName" id="companyName" value="${query.companyName}" placeholder=""  class="form-control input-from-control"   maxlength="255"  class=""/>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="stockEvent" class="control-label">事件内容</label>
 						<input name="stockEvent" id="stockEvent" value="${query.stockEvent}" placeholder=""  class="form-control input-from-control"   maxlength="4000"  class=""/>
 					</div>
 				</div>
-			</div>
 
 			
-			<div class="row">
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="relateCompany" class="control-label">关联公司</label>
 						<input name="relateCompany" id="relateCompany" value="${query.relateCompany}" placeholder=""  class="form-control input-from-control"   maxlength="2000"  class=""/>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="remarks" class="control-label">备注</label>
 						<input name="remarks" id="remarks" value="${query.remarks}" placeholder=""  class="form-control input-from-control"   maxlength="2000"  class=""/>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="attentionDateBegin" class="control-label">开始重新关注日期</label>
 						<input name="attentionDateBegin" id="attentionDateBegin" value="<fmt:formatDate value='${query.attentionDateBegin}' pattern='yyyy-MM-dd'/>"  placeholder="开始时间"   class="form-control input-from-control"   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"   />
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="attentionDateEnd" class="control-label">结束重新关注日期</label>
 						<input name="attentionDateEnd" id="attentionDateEnd" value="<fmt:formatDate value='${query.attentionDateEnd}' pattern='yyyy-MM-dd'/>" placeholder="结束时间" class="form-control input-from-control"   onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    />
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-6">
 					<div class="form-group">
 						<label for="relateStock" class="control-label">关联股票</label>
 						<input name="relateStock" id="relateStock" value="${query.relateStock}" placeholder=""  class="form-control input-from-control"   maxlength="255"  class=""/>
 					</div>
 				</div>
 			</div>
-
 				
-			<div style="margin-top:20px"  class="row text-left">
+			<div class="row text-left">
 				<div class="col-sm-5">
+					<a href="#" class="btn btn-primary btn-sm hidden-lg" onclick="$('#query-content').toggleClass('visible-lg');">显示搜索</a>
 					<a href="#" class="btn btn-primary btn-sm"  onclick="$(this).closest('form').action='${ctx}/admin/companyevent/index.do'; $(this).closest('form').submit();return false;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索</a>
 					<a class="btn btn-primary btn-sm" href="${ctx}/admin/companyevent/add.do"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增</a>
-					<a class="btn btn-primary btn-sm" href="${ctx}/pages/admin/companyevent/upload.jsp"><span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入</a>
+					<a class="btn btn-primary btn-sm visible-lg" href="${ctx}/pages/admin/companyevent/upload.jsp"><span class="glyphicon glyphicon-import" aria-hidden="true"></span> 批量导入</a>
 				</div>
 			</div>
 		</div>
