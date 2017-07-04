@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -117,10 +118,16 @@ public class StockIndicatorCrawler {
 		return false;
 	}
 
+	private int timeout = 1000 * 60;
 	private String readContentByURL(String strUrl) throws MalformedURLException, IOException {
 		URL url = new URL(strUrl);
-		InputStream inputStream = url.openStream();
+		URLConnection conn = url.openConnection();
+		conn.setReadTimeout(timeout);
+		conn.setConnectTimeout(timeout);
+		InputStream inputStream = null;
 		try {
+			conn.connect();
+			inputStream = conn.getInputStream();
 			String content = IOUtils.toString(inputStream);
 			return content;
 		}finally {
