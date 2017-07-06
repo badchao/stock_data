@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import com.github.stock_data.service.impl.StockIndicatorCrawler;
 @Service("stockIndicatorCrawlJob")
 public class StockIndicatorCrawlJob {
 
+	private static Logger logger = LoggerFactory.getLogger(StockIndicatorCrawlJob.class);
+	
 	private StockIndicatorConfigService stockIndicatorConfigService;
 	private StockIndicatorService stockIndicatorService;
 	
@@ -31,8 +35,11 @@ public class StockIndicatorCrawlJob {
 		this.stockIndicatorService = stockIndicatorService;
 	}
 
-	@Scheduled(cron="1 1 3,8,10,12,15,19,22 * * *")
-	public void exec() {
+//	@Scheduled(cron="1 1 3,8,10,12,15,19,22 * * *")
+	@Scheduled(cron="1 1,30 * * * *")
+	public synchronized void exec() {
+		logger.info("exec() START"); 
+		
 		StockIndicatorConfigQuery query = new StockIndicatorConfigQuery();
 		query.setPageSize(1000);
 		
@@ -44,7 +51,9 @@ public class StockIndicatorCrawlJob {
 			crawlAll(page);
 		}
 		
+		logger.info("exec() END"); 
 	}
+	
 
 	private void crawlAll(Page<StockIndicatorConfig> page) {
 		StockIndicatorCrawler stockIndicatorCrawler = new StockIndicatorCrawler();

@@ -28,6 +28,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.Assert;
 
@@ -36,6 +38,7 @@ import com.github.rapid.common.util.ScriptEngineUtil;
 import com.github.rapid.common.util.SelectorUtil;
 import com.github.stock_data.common.util.DateUtil;
 import com.github.stock_data.common.util.PlainMapUtil;
+import com.github.stock_data.cron_job.StockIndicatorCrawlJob;
 import com.github.stock_data.model.StockIndicatorConfig;
 
 import freemarker.template.Configuration;
@@ -43,6 +46,8 @@ import freemarker.template.Template;
 
 public class StockIndicatorCrawler {
 
+	private static Logger logger = LoggerFactory.getLogger(StockIndicatorCrawler.class);
+	
 	private static ObjectMapper objectMapper = new ObjectMapper();
 	
 	public Object evalCrawlScript(StockIndicatorConfig config) throws Exception {
@@ -55,7 +60,10 @@ public class StockIndicatorCrawler {
 	}
 
 	public Object evalCrawlScript(String crawlUrl, String crawlScript) throws MalformedURLException, Exception {
-		String content = readContentByURL(processUrlByFreemarker(crawlUrl));
+		String processedCrawlUrl = processUrlByFreemarker(crawlUrl);
+		logger.info("evalCrawlScript() processedCrawlUrl:"+processedCrawlUrl); 
+		
+		String content = readContentByURL(processedCrawlUrl);
 		Map context = buildContext(content);
 		Object result = ScriptEngineUtil.eval("groovy", crawlScript,context);
 		Object finalResult = processResult(result);
