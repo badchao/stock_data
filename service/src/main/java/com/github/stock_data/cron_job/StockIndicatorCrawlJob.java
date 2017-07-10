@@ -6,6 +6,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import com.github.stock_data.service.StockIndicatorService;
 import com.github.stock_data.service.impl.StockIndicatorCrawler;
 
 @Service("stockIndicatorCrawlJob")
-public class StockIndicatorCrawlJob {
+public class StockIndicatorCrawlJob implements InitializingBean {
 
 	private static Logger logger = LoggerFactory.getLogger(StockIndicatorCrawlJob.class);
 	
@@ -35,8 +36,8 @@ public class StockIndicatorCrawlJob {
 		this.stockIndicatorService = stockIndicatorService;
 	}
 
-//	@Scheduled(cron="1 1 3,8,10,12,15,19,22 * * *")
-	@Scheduled(cron="1 1,30 * * * *")
+	@Scheduled(cron="1 1 3,8,10,12,15,19,22 * * *")
+//	@Scheduled(cron="1 1,30 * * * *")
 	public synchronized void exec() {
 		logger.info("exec() START"); 
 		
@@ -96,5 +97,27 @@ public class StockIndicatorCrawlJob {
 			stockIndicatorService.update(si);
 		}
 //		si.setExt("");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true) {
+					try {
+						exec();
+					}catch(Exception e){
+						e.printStackTrace();
+					}finally {
+						try {
+							Thread.sleep(1000 * 3600);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		},"StockIndicatorCrawlJob");
 	}
 }
