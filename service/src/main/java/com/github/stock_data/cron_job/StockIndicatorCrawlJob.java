@@ -101,7 +101,7 @@ public class StockIndicatorCrawlJob implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		new Thread(new Runnable() {
+		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while(true) {
@@ -119,5 +119,6 @@ public class StockIndicatorCrawlJob implements InitializingBean {
 				}
 			}
 		},"StockIndicatorCrawlJob");
+		t.start();
 	}
 }
