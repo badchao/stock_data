@@ -67,7 +67,7 @@ public class StockIndicatorCrawlJob implements InitializingBean {
 				sic.setCrawlLog("");
 			}catch(Exception e) {
 				sic.setCrawlStatus("danger");
-				sic.setCrawlLog(ExceptionUtils.getFullStackTrace(e).substring(0,3999));
+				sic.setCrawlLog(StringUtils.substring(ExceptionUtils.getFullStackTrace(e),0,3999));
 				e.printStackTrace();
 			}
 			sic.setLastCrawlTime(new Date());
