@@ -14,13 +14,13 @@ public class CronTest {
 	@Scheduled(cron="* * * * * *")
 	public void exception() throws Exception {
 		System.out.println("CronTest.exception()");
-		throw new RuntimeException("exception()");
+//		throw new RuntimeException("exception()");
 	}
 		
 	
 	@Scheduled(cron="* * * * * *")
 	public void error() throws Exception {
 		System.out.println("CronTest.error()");
-		throw new Error("Error()");
+//		throw new Error("Error()");
 	}
 }

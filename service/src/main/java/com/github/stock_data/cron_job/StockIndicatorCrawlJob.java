@@ -38,7 +38,7 @@ public class StockIndicatorCrawlJob implements InitializingBean {
 
 	@Scheduled(cron="1 1 3,8,10,12,15,19,22 * * *")
 //	@Scheduled(cron="1 1,30 * * * *")
-	public synchronized void exec() {
+	public void exec() {
 		logger.info("exec() START"); 
 		
 		StockIndicatorConfigQuery query = new StockIndicatorConfigQuery();
@@ -107,8 +107,9 @@ public class StockIndicatorCrawlJob implements InitializingBean {
 				while(true) {
 					try {
 						exec();
-					}catch(Exception e){
+					}catch(Throwable e){
 						e.printStackTrace();
+						logger.info("exec() error",e); 
 					}finally {
 						try {
 							Thread.sleep(1000 * 3600);
