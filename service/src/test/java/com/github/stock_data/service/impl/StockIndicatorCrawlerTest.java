@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
+import com.github.stock_data.common.util.NumberParser;
 import com.github.stock_data.model.StockIndicatorConfig;
 
 public class StockIndicatorCrawlerTest {
@@ -43,4 +44,25 @@ public class StockIndicatorCrawlerTest {
 		Thread.sleep(1000 * 3600);
 	}
 
+	@Test
+	public void test_sum() throws Exception {
+		StockIndicatorCrawler c = new StockIndicatorCrawler();
+		StockIndicatorConfig conf = new StockIndicatorConfig();
+		conf.setCrawlUrl("https://www.hexindai.com/siteinfo?_=1508230624508");
+		conf.setCrawlScript("return json.get('sum');");
+		System.out.println(c.evalCrawlScript(conf));
+	}
+
+	@Test
+	public void test_income() throws Exception {
+		StockIndicatorCrawler c = new StockIndicatorCrawler();
+		StockIndicatorConfig conf = new StockIndicatorConfig();
+		conf.setCrawlUrl("https://www.hexindai.com/siteinfo?_=1508230624508");
+		conf.setCrawlScript("return json.get('income');");
+		Object value = c.evalCrawlScript(conf);
+		System.out.println(value);
+		System.out.println(NumberParser.parseChineseNumber(value.toString()));
+	}
+	
+	
 }
